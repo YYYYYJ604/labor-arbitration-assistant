@@ -119,25 +119,62 @@ npm run dev
 ⚠️ 文件存储说明：当前版本证据文件保存在本地 public/uploads/ 目录。由于 Vercel 是无服务器环境，该目录不可持久写入。生产环境请改用 Supabase Storage（免费 1GB）。参考 docs/migrate-to-supabase-storage.md（如有）或联系作者获取迁移方案。
 
 📂 项目结构
-text
+labor-arbitration-assistant/
 ├── app/
-│   ├── api/                    # 后端 API 路由
-│   │   ├── chat/               # AI 问答接口
-│   │   ├── upload/             # 文件上传接口
-│   │   ├── evidences/          # 证据列表 CRUD
-│   │   ├── generate-document/  # 申请书生成接口
-│   │   └── chats/              # 聊天记录管理
-│   ├── login/                  # 登录页面
-│   ├── dashboard/              # 主工作台（包含三个模块）
-│   └── evidence/[id]/          # 证据详情页
+│   ├── api/
+│   │   ├── analyze/
+│   │   │   └── route.ts
+│   │   ├── chat/
+│   │   │   └── route.ts
+│   │   ├── chats/
+│   │   │   ├── [id]/
+│   │   │   │   └── route.ts
+│   │   │   └── route.ts
+│   │   ├── evidence/
+│   │   │   └── [id]/
+│   │   │       └── route.ts
+│   │   ├── evidences/
+│   │   │   └── route.ts
+│   │   ├── generate-document/
+│   │   │   └── route.ts
+│   │   └── upload/
+│   │       └── route.ts
+│   ├── dashboard/
+│   │   └── page.tsx
+│   ├── evidence/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── login/
+│   │   └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 ├── lib/
-│   ├── supabaseClient.ts       # Supabase 客户端配置
-│   ├── aiClient.ts             # AI 客户端（DeepSeek）
-│   ├── getUserFromToken.ts     # 从请求头解析用户
-│   └── imageToPdfBrowser.ts    # 浏览器端图片转 PDF 工具
-├── public/uploads/             # 本地存储目录（仅开发用）
-├── .env.local                  # 环境变量（不提交）
-└── ...配置文件
+│   ├── aiAnalyzeConfig.ts
+│   ├── aiClient.ts
+│   ├── extractEvidenceText.ts
+│   ├── getUserFromToken.ts
+│   ├── imageToPdfBrowser.ts
+│   ├── parseAiJsonObject.ts
+│   ├── supabaseClient.ts
+│   └── supabaseRoute.ts
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── types/
+│   └── pdf-parse.d.ts
+├── .env.local
+├── .gitignore
+├── next.config.ts
+├── package.json
+├── README.md
+└── tsconfig.json
+
+
 📝 数据库表结构
 表名	字段	说明
 evidences	id, user_id, file_url, analysis_result, created_at	用户上传的证据
